@@ -1,7 +1,6 @@
 import os, logging, asyncio
 from telethon import Button
-from telethon import events as nan
-from telethon import TelegramClient as ky
+from telethon import TelegramClient, events
 from telethon.tl.types import ChannelParticipantAdmin
 from telethon.tl.types import ChannelParticipantCreator
 from telethon.tl.functions.channels import GetParticipantRequest
@@ -17,11 +16,11 @@ LOGGER = logging.getLogger(__name__)
 api_id = API_ID
 api_hash = API_HASH
 bot_token = TOKEN
-pler = ky('kynan', api_id, api_hash).start(bot_token=bot_token)
+pler = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
 
-@pler.on(nan.NewMessage(pattern="^/help$"))
+@client.on(on.NewMessage(pattern="^/help$"))
 async def help(event):
   helptext = "**Yaelah biji tinggal ketik all doang bego pake ketik help**"
   await event.reply(
@@ -35,7 +34,7 @@ async def help(event):
     )
   )
   
-@pler.on(nan.NewMessage(pattern="^/all ?(.*)"))
+@client.on(on.NewMessage(pattern="^/all ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -98,7 +97,7 @@ async def mentionall(event):
   except:
     pass
 
-@pler.on(nan.NewMessage(pattern="^/(cancel|stop|batal)$"))
+@client.on(on.NewMessage(pattern="^/(cancel|stop|batal)$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('**Bego orang gak ada tag all**')
@@ -110,6 +109,4 @@ async def cancel_spam(event):
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
 
 
-
-print("GOBLOK GA JELAS")
 pler.run_until_disconnected()
