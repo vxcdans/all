@@ -16,11 +16,11 @@ LOGGER = logging.getLogger(__name__)
 api_id = API_ID
 api_hash = API_HASH
 bot_token = TOKEN
-client = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
+kntl = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
 
-@client.on(events.NewMessage(pattern="^/start$"))
+@kntl.on(events.NewMessage(pattern="^/start$"))
 async def help(event):
   helptext = "**Yaelah biji tinggal ketik all doang bego pake ketik help**"
   await event.reply(
@@ -29,12 +29,12 @@ async def help(event):
     buttons=(
       [
         Button.url('📣 Channel', 'https://t.me/kontenfilm'),
-        Button.url('📦 Source', 'https://kynansupport')
+        Button.url('📦 Source', 'https://t.me/kynansupport')
       ]
     )
   )
   
-@client.on(events.NewMessage(pattern="^/(all|utag|mention) ?(.*)"))
+@kntl.on(events.NewMessage(pattern="^/(all|utag|mention) ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -78,7 +78,7 @@ async def mentionall(event):
   spam_chats.append(chat_id)
   usrnum = 0
   usrtxt = ''
-  async for usr in client.iter_participants(chat_id):
+  async for usr in kntl.iter_participants(chat_id):
     if not chat_id in spam_chats:
       break
     usrnum += 1
@@ -86,7 +86,7 @@ async def mentionall(event):
     if usrnum == 5:
       if mode == "teks":
         txt = f"{usrtxt}\n\n{msg}"
-        await client.send_message(chat_id, txt)
+        await kntl.send_message(chat_id, txt)
       elif mode == "balas":
         await msg.reply(usrtxt)
       await asyncio.sleep(2)
@@ -97,7 +97,7 @@ async def mentionall(event):
   except:
     pass
 
-@client.on(events.NewMessage(pattern="^/(cancel|stop|batal)$"))
+@kntl.on(events.NewMessage(pattern="^/(cancel|stop|batal)$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('**Bego orang gak ada tag all**')
@@ -111,4 +111,4 @@ async def cancel_spam(event):
 
 
 print("BOT AKTIF")
-client.run_until_disconnected()
+kntl.run_until_disconnected()
