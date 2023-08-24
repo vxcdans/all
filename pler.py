@@ -35,7 +35,7 @@ async def help(event):
     )
   )
   
-@pler.on(nan.NewMessage(pattern="^/all?(.*)"))
+@pler.on(nan.NewMessage(pattern="^/all ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -66,10 +66,10 @@ async def mentionall(event):
   if event.pattern_match.group(1) and event.is_reply:
     return await event.respond("**Minimal kasih pesan anjeng!!**")
   elif event.pattern_match.group(1):
-    mode = "teks"
+    mode = "text_on_cmd"
     msg = event.pattern_match.group(1)
   elif event.is_reply:
-    mode = "balas"
+    mode = "text_on_reply"
     msg = await event.get_reply_message()
     if msg == None:
         return await event.respond("**Si anjeng dibilang kasih pesan !!**")
