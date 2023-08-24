@@ -16,11 +16,11 @@ LOGGER = logging.getLogger(__name__)
 api_id = API_ID
 api_hash = API_HASH
 bot_token = TOKEN
-pler = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
+client = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
 
-@client.on(on.NewMessage(pattern="^/help$"))
+@client.on(events.NewMessage(pattern="^/help$"))
 async def help(event):
   helptext = "**Yaelah biji tinggal ketik all doang bego pake ketik help**"
   await event.reply(
@@ -34,7 +34,7 @@ async def help(event):
     )
   )
   
-@client.on(on.NewMessage(pattern="^/all ?(.*)"))
+@client.on(events.NewMessage(pattern="^/all ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -97,7 +97,7 @@ async def mentionall(event):
   except:
     pass
 
-@client.on(on.NewMessage(pattern="^/(cancel|stop|batal)$"))
+@client.on(events.NewMessage(pattern="^/(cancel|stop|batal)$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('**Bego orang gak ada tag all**')
@@ -109,4 +109,4 @@ async def cancel_spam(event):
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
 
 
-pler.run_until_disconnected()
+client.run_until_disconnected()
