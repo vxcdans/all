@@ -20,7 +20,7 @@ client = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
 
-@client.on(events.NewMessage(pattern="start$"))
+@client.on(events.NewMessage(pattern="^/start$"))
 async def help(event):
   helptext = "**Yaelah biji tinggal ketik all doang bego pake ketik help**"
   await event.reply(
@@ -34,11 +34,11 @@ async def help(event):
     )
   )
   
-@client.on(events.NewMessage(pattern="(all|utag|mention) ?(.*)"))
+@client.on(events.NewMessage(pattern="^/(all|utag|mention) ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
-    return await event.respond("**Jangan prive bego**")
+    return await event.respond("**Jangan private bego**")
   
   is_admin = False
   try:
@@ -97,7 +97,7 @@ async def mentionall(event):
   except:
     pass
 
-@client.on(events.NewMessage(pattern="(cancel|stop|batal)$"))
+@client.on(events.NewMessage(pattern="^/(cancel|stop|batal)$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('**Bego orang gak ada tag all**')
