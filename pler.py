@@ -1,11 +1,12 @@
 import os, logging, asyncio
 from telethon import Button
 from telethon import nan as nan
-from telethon import Telegramky as ky
+from telethon import TelegramClient as ky
 from telethon.tl.types import ChannelParticipantAdmin
 from telethon.tl.types import ChannelParticipantCreator
 from telethon.tl.functions.channels import GetParticipantRequest
-from telethon.errors import UserNotParticipantError
+from telethon.errors import UserNotParticipantErro
+from config import *
 
 logging.basicConfig(
     level=logging.INFO,
@@ -13,10 +14,10 @@ logging.basicConfig(
 )
 LOGGER = logging.getLogger(__name__)
 
-api_id = int(os.environ.get("APP_ID"))
-api_hash = os.environ.get("API_HASH")
-bot_token = os.environ.get("TOKEN")
-pler = Telegramky('kynan', api_id, api_hash).start(bot_token=bot_token)
+api_id = API_ID
+api_hash = API_HASH
+bot_token = TOKEN
+pler = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
 @ky.on(nan.NewMessage(pattern="start$"))
