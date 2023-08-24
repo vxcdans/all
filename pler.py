@@ -35,7 +35,7 @@ async def help(event):
     )
   )
   
-@pler.on(nan.NewMessage(pattern="^/(all|utag|mention) ?(.*)"))
+@pler.on(nan.NewMessage(pattern="^/all?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -109,7 +109,7 @@ async def cancel_spam(event):
       pass
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
 
-    
+
 
 print("GOBLOK GA JELAS")
 pler.run_until_disconnected()
