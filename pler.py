@@ -78,7 +78,7 @@ async def mentionall(event):
   spam_chats.append(chat_id)
   usrnum = 0
   usrtxt = ''
-  async for usr in ky.iter_participants(chat_id):
+  async for usr in event.iter_participants(chat_id):
     if not chat_id in spam_chats:
       break
     usrnum += 1
@@ -86,7 +86,7 @@ async def mentionall(event):
     if usrnum == 5:
       if mode == "teks":
         txt = f"{usrtxt}\n\n{msg}"
-        await ky.send_message(chat_id, txt)
+        await event.send_message(chat_id, txt)
       elif mode == "balas":
         await msg.reply(usrtxt)
       await asyncio.sleep(2)
