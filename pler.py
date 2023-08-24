@@ -65,10 +65,10 @@ async def mentionall(event):
   if event.pattern_match.group(1) and event.is_reply:
     return await event.respond("**Minimal kasih pesan anjeng!!**")
   elif event.pattern_match.group(1):
-    mode = "text_on_cmd"
+    mode = "teks"
     msg = event.pattern_match.group(1)
   elif event.is_reply:
-    mode = "text_on_reply"
+    mode = "balas"
     msg = await event.get_reply_message()
     if msg == None:
         return await event.respond("**Si anjeng dibilang kasih pesan !!**")
