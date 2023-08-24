@@ -42,7 +42,7 @@ async def mentionall(event):
   
   is_admin = False
   try:
-    partici_ = await ky(GetParticipantRequest(
+    partici_ = await client(GetParticipantRequest(
       event.chat_id,
       event.sender_id
     ))
