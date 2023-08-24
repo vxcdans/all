@@ -1,6 +1,6 @@
 import os, logging, asyncio
 from telethon import Button
-from telethon import nan as nan
+from telethon import events as nan
 from telethon import TelegramClient as ky
 from telethon.tl.types import ChannelParticipantAdmin
 from telethon.tl.types import ChannelParticipantCreator
