@@ -20,20 +20,8 @@ bot_token = TOKEN
 pler = ky('kynan', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
-@pler.on(nan.NewMessage(pattern="start$"))
-async def start(event):
-  await event.reply(
-    "Ngapa njeng ? Ni Repo tag all req si RW Buaya Darat",
-    link_preview=False,
-    buttons=(
-      [
-        Button.url('📣 Channel', 'https://t.me/kontenfilm'),
-        Button.url('📦 Source', 'https://kynansupport')
-      ]
-    )
-  )
 
-@pler.on(nan.NewMessage(pattern="help$"))
+@pler.on(nan.NewMessage(pattern="^/help$"))
 async def help(event):
   helptext = "**Yaelah biji tinggal ketik all doang bego pake ketik help**"
   await event.reply(
@@ -47,7 +35,7 @@ async def help(event):
     )
   )
   
-@pler.on(nan.NewMessage(pattern="(all|utag|mention) ?(.*)"))
+@pler.on(nan.NewMessage(pattern="^/(all|utag|mention) ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -110,7 +98,7 @@ async def mentionall(event):
   except:
     pass
 
-@pler.on(nan.NewMessage(pattern="(cancel|stop|batal)$"))
+@pler.on(nan.NewMessage(pattern="^/(cancel|stop|batal)$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('**Bego orang gak ada tag all**')
@@ -120,6 +108,8 @@ async def cancel_spam(event):
     except:
       pass
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
+
+    
 
 print("GOBLOK GA JELAS")
 pler.run_until_disconnected()
