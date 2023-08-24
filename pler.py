@@ -17,7 +17,7 @@ LOGGER = logging.getLogger(__name__)
 api_id = API_ID
 api_hash = API_HASH
 bot_token = TOKEN
-pler = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
+pler = ky('kynan', api_id, api_hash).start(bot_token=bot_token)
 spam_chats = []
 
 @ky.on(nan.NewMessage(pattern="start$"))
