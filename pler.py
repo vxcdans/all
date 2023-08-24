@@ -78,7 +78,7 @@ async def mentionall(event):
   spam_chats.append(chat_id)
   usrnum = 0
   usrtxt = ''
-  async for usr in event.iter_participants(chat_id):
+  async for usr in client.iter_participants(chat_id):
     if not chat_id in spam_chats:
       break
     usrnum += 1
@@ -86,7 +86,7 @@ async def mentionall(event):
     if usrnum == 5:
       if mode == "teks":
         txt = f"{usrtxt}\n\n{msg}"
-        await event.send_message(chat_id, txt)
+        await client.send_message(chat_id, txt)
       elif mode == "balas":
         await msg.reply(usrtxt)
       await asyncio.sleep(2)
@@ -109,4 +109,6 @@ async def cancel_spam(event):
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
 
 
+
+print("BOT AKTIF")
 client.run_until_disconnected()
