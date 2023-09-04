@@ -169,7 +169,7 @@ async def mentionall(event):
     if not chat_id in spam_chats:
       break
     usrnum += 1
-    usrtxt += f"<a href=tg://user?id={usr.id}>{random.choice(emoji)}</a>"
+    usrtxt += f"[{random.choice(emoji)}](tg://user?id={usr.id})"
     if usrnum == 5:
       if mode == "teks":
         txt = f"{usrtxt}\n\n{msg}"
