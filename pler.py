@@ -17,25 +17,28 @@ api_id = API_ID
 api_hash = API_HASH
 bot_token = TOKEN
 kntl = TelegramClient('kynan', api_id, api_hash).start(bot_token=bot_token)
+
+
 spam_chats = []
+
+emoji = "😀 😃 😄 😁 😆 😅 😂 🤣 😭 😗 😙 😚 😘 🥰 😍 🤩 🥳 🤗 🙃 🙂 ☺️ 😊 😏 😌 😉 🤭 😶 😐 😑 😔 😋 😛 😝 😜 🤪 🤔 🤨 🧐 🙄 😒 😤 😠 🤬 ☹️ 🙁 😕 😟 🥺 😳 😬 🤐 🤫 😰 😨 😧 😦 😮 😯 😲 😱 🤯 😢 😥 😓 😞 😖 😣 😩 😫 🤤 🥱 😴 😪 🌛 🌜 🌚 🌝 🎲 🧩 ♟ 🎯 🎳 🎭💕 💞 💓 💗 💖 ❤️‍🔥 💔 🤎 🤍 🖤 ❤️ 🧡 💛 💚 💙 💜 💘 💝 🐵 🦁 🐯 🐱 🐶 🐺 🐻 🐨 🐼 🐹 🐭 🐰 🦊 🦝 🐮 🐷 🐽 🐗 🦓 🦄 🐴 🐸 🐲 🦎 🐉 🦖 🦕 🐢 🐊 🐍 🐁 🐀 🐇 🐈 🐩 🐕 🦮 🐕‍🦺 🐅 🐆 🐎 🐖 🐄 🐂 🐃 🐏 🐑 🐐 🦌 🦙 🦥 🦘 🐘 🦏 🦛 🦒 🐒 🦍 🦧 🐪 🐫 🐿️ 🦨 🦡 🦔 🦦 🦇 🐓 🐔 🐣 🐤 🐥 🐦 🦉 🦅 🦜 🕊️ 🦢 🦩 🦚 🦃 🦆 🐧 🦈 🐬 🐋 🐳 🐟 🐠 🐡 🦐 🦞 🦀 🦑 🐙 🦪 🦂 🕷️ 🦋 🐞 🐝 🦟 🦗 🐜 🐌 🐚 🕸️ 🐛 🐾 🌞 🤢 🤮 🤧 🤒 🍓 🍒 🍎 🍉 🍑 🍊 🥭 🍍 🍌 🌶 🍇 🥝 🍐 🍏 🍈 🍋 🍄 🥕 🍠 🧅 🌽 🥦 🥒 🥬 🥑 🥯 🥖 🥐 🍞 🥜 🌰 🥔 🧄 🍆 🧇 🥞 🥚 🧀 🥓 🥩 🍗 🍖 🥙 🌯 🌮 🍕 🍟 🥨 🥪 🌭 🍔 🧆 🥘 🍝 🥫 🥣 🥗 🍲 🍛 🍜 🍢 🥟 🍱 🍚 🥡 🍤 🍣 🦞 🦪 🍘 🍡 🥠 🥮 🍧 🍨".split(
+    " "
+)
 
 
 @kntl.on(events.NewMessage(pattern="^/start$"))
 async def help(event):
-  helptext = "**Yaelah biji tinggal ketik all doang bego pake ketik start**"
+  helptext = "**Ada 2 Mode Tag All Cok, Kalo /all emot sange + nama user. kalo /emojitag itu random emote tanpa nama user.**"
   await event.reply(
     helptext,
     link_preview=False,
     buttons=(
       [
-        Button.url('Owner💋', 't.me/rewe_anu'),
+        Button.url('Owner💋', 't.me/kenapanan'),
       ],
       [
-        Button.url('Support💋', 't.me/supprotrewe'),
-        Button.url('Channel💋', 't.me/sattvibes'),
-      ],
-      [
-        Button.url('Kalo mau nyumbang boleh💋💋', 'https://link.dana.id/qr/g6f1u7du')
+        Button.url('Support💋', 't.me/kynansupport'),
+        Button.url('Channel💋', 't.me/kontenfilm'),
       ],
     )
   )
@@ -103,6 +106,7 @@ async def mentionall(event):
   except:
     pass
 
+
 @kntl.on(events.NewMessage(pattern="^/stop$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
@@ -115,6 +119,69 @@ async def cancel_spam(event):
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
 
 
+@kntl.on(events.NewMessage(pattern="^/emojitag ?(.*)"))
+async def mentionall(event):
+  chat_id = event.chat_id
+  if event.is_private:
+    return await event.respond("**Jangan private bego**")
+  
+  is_admin = False
+  try:
+    partici_ = await kntl(GetParticipantRequest(
+      event.chat_id,
+      event.sender_id
+    ))
+  except UserNotParticipantError:
+    is_admin = False
+  else:
+    if (
+      isinstance(
+        partici_.participant,
+        (
+          ChannelParticipantAdmin,
+          ChannelParticipantCreator
+        )
+      )
+    ):
+      is_admin = True
+  if not is_admin:
+    return await event.respond("**Lu bukan admin anjeng**")
+  
+  if event.pattern_match.group(1) and event.is_reply:
+    return await event.respond("**Minimal kasih pesan anjeng!!**")
+  elif event.pattern_match.group(1):
+    mode = "teks"
+    msg = event.pattern_match.group(1)
+  elif event.is_reply:
+    mode = "balas"
+    msg = await event.get_reply_message()
+    if msg == None:
+        return await event.respond("**Si anjeng dibilang kasih pesan !!**")
+  else:
+    return await event.respond("**Si anjeng dibilang kasih pesan !!**")
+  
+  spam_chats.append(chat_id)
+  usrnum = 0
+  usrtxt = ''
+  async for usr in kntl.iter_participants(chat_id):
+    if not chat_id in spam_chats:
+      break
+    usrnum += 1
+    usrtxt += f"<a href=tg://user?id={usr.id}>{random.choice(emoji)}</a>"
+    if usrnum == 5:
+      if mode == "teks":
+        txt = f"{usrtxt}\n\n{msg}"
+        await kntl.send_message(chat_id, txt)
+      elif mode == "balas":
+        await msg.reply(usrtxt)
+      await asyncio.sleep(2)
+      usrnum = 0
+      usrtxt = ''
+  try:
+    spam_chats.remove(chat_id)
+  except:
+    pass
 
-print("BOT AKTIF")
+
+print("BOT AKTIF KONTOL")
 kntl.run_until_disconnected()
