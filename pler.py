@@ -30,22 +30,22 @@ emoji = "😀 😃 😄 😁 😆 😅 😂 🤣 😭 😗 😙 😚 😘 🥰 �
 
 @kntl.on(events.NewMessage(pattern="^/start$"))
 async def help(event):
-  helptext = "**Ada 2 Mode Tag All Cok, Kalo /all emot sange + nama user. kalo /emojitag itu random emote tanpa nama user.**"
+  helptext = "**Ada 2 Mode Tag All Cok, Kalo /tagall emot sange + nama user. kalo /all itu random emote tanpa nama user.**"
   await event.reply(
     helptext,
     link_preview=False,
     buttons=(
       [
-        Button.url('Owner💋', 't.me/kenapanan'),
+        Button.url('Owner', 't.me/kagebunshiiin'),
       ],
       [
-        Button.url('Support💋', 't.me/kynansupport'),
-        Button.url('Channel💋', 't.me/kontenfilm'),
+        Button.url('Support', 't.me/suportkage'),
+        Button.url('Channel💋', 't.me/kagestore69'),
       ],
     )
   )
   
-@kntl.on(events.NewMessage(pattern="^/all ?(.*)"))
+@kntl.on(events.NewMessage(pattern="^/tagall ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -121,7 +121,7 @@ async def cancel_spam(event):
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
 
 
-@kntl.on(events.NewMessage(pattern="^/emojitag ?(.*)"))
+@kntl.on(events.NewMessage(pattern="^/all ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
