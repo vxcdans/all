@@ -40,7 +40,7 @@ async def help(event):
       ],
       [
         Button.url('Support', 't.me/suportkage'),
-        Button.url('Channel💋', 't.me/kagestore69'),
+        Button.url('Channel', 't.me/kagestore69'),
       ],
     )
   )
