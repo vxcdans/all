@@ -36,11 +36,11 @@ async def help(event):
     link_preview=False,
     buttons=(
       [
-        Button.url('Owner💋', 't.me/DantePediaV1'),
+        Button.url('Owner💋', 't.me/DanteVincentee'),
       ],
       [
-        Button.url('Support💋', 't.me/DanteXSupport'),
-        Button.url('Channel💋', 't.me/testidantepedia'),
+        Button.url('Support💋', 't.me/DanteSupportss'),
+        Button.url('Channel💋', 't.me/DantePedia'),
       ],
     )
   )
