@@ -45,7 +45,7 @@ async def help(event):
     )
   )
   
-@kntl.on(events.NewMessage(pattern="^/all ?(.*)"))
+@kntl.on(events.NewMessage(pattern="^/emojitag ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
@@ -109,7 +109,7 @@ async def mentionall(event):
     pass
 
 
-@kntl.on(events.NewMessage(pattern="^/stop$"))
+@kntl.on(events.NewMessage(pattern="^/cancel$"))
 async def cancel_spam(event):
   if not event.chat_id in spam_chats:
     return await event.respond('**Bego orang gak ada tag all**')
@@ -121,7 +121,7 @@ async def cancel_spam(event):
     return await event.respond('**Iya Anjeng Nih Gua Stop.**')
 
 
-@kntl.on(events.NewMessage(pattern="^/emojitag ?(.*)"))
+@kntl.on(events.NewMessage(pattern="^/all ?(.*)"))
 async def mentionall(event):
   chat_id = event.chat_id
   if event.is_private:
