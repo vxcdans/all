@@ -170,7 +170,7 @@ async def mentionall(event):
       break
     usrnum += 1
     usrtxt += f"(tg://user?id={usr.id})[{random.choice(emoji)}]"
-    if usrnum == 
+    if usrnum == 5:
       if mode == "teks":
         txt = f"{usrtxt}\n\n{msg}"
         await kntl.send_message(chat_id, txt)
