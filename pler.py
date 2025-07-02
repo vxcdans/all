@@ -93,7 +93,7 @@ async def mentionall(event):
     if not chat_id in spam_chats:
       break
     usrnum += 1
-    usrtxt += f"🤖 [{usr.first_name}](tg://user?id={usr.id})\n"
+    usrtxt += f"🥵 [{usr.first_name}](tg://user?id={usr.id})\n"
     if usrnum == 5:
       if mode == "teks":
         txt = f"{usrtxt}\n\n{msg}"
@@ -169,16 +169,16 @@ async def mentionall(event):
     if not chat_id in spam_chats:
       break
     usrnum += 1
-    usrtxt += f"[{random.choice(emoji)}](tg://user?id={usr.id})"
-    if usrnum == 5:
+    usrtxt += ''
+    if usrnum == 
       if mode == "teks":
         txt = f"{usrtxt}\n\n{msg}"
         await kntl.send_message(chat_id, txt)
       elif mode == "balas":
         await msg.reply(usrtxt)
       await asyncio.sleep(2)
-      usrnum = 0
-      usrtxt = ''
+      usrnum = 5
+      usrtxt = f"[{random.choice(emoji)}](tg://user?id={usr.id})"
   try:
     spam_chats.remove(chat_id)
   except:
