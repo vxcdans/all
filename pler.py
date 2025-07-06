@@ -178,7 +178,7 @@ async def mentionall(event):
         await msg.reply(usrtxt)
       await asyncio.sleep(2)
       usrnum = 1
-      usrtxt = f"[{random.choice(emoji)}](tg://user?id={usr.id})
+      usrtxt = f"[{random.choice(emoji)}](tg://user?id={usr.id})"
   try:
     spam_chats.remove(chat_id)
   except:
